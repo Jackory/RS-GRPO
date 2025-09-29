@@ -1,8 +1,10 @@
 <h1 style="text-align: center;">Risk-Sensitive RL for Alleviating Exploration Dilemmas in Large Language Models</h1>
 
-<!-- <div align="center"> -->
+<div align="center">
 
 [![Paper](https://img.shields.io/badge/paper-A42C25?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2506.10406)
+
+</div>
 
 # Introduction
 
@@ -18,7 +20,7 @@ We introduce a **Risk-Sensitive RL** framework to enhance exploration. Our metho
 The **Risk-Sensitive Objective** is defined as:
 
 $$
-\mathcal{J}_{\text{RS}}(\pi_\theta) = \mathbb{E}_{x \sim \mathcal{D}} \left[ \frac{1}{\beta} \log \mathbb{E}_{y \sim \pi_\theta(\cdot|x)} \! \left[ e^{\beta r(y)} \right] \right]
+\mathcal{J}_{\text{RS}}(\pi_\theta) = \mathbb{E}_{x \sim \mathcal{D}} \left[ \frac{1}{\beta} \log \mathbb{E}_{y \sim \pi_\theta(\cdot|x)} \left[ e^{\beta r(y)} \right] \right]
 $$
 
 where $\beta \in (0, +\infin)$, controls the risk-sensitivity. 

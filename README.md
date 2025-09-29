@@ -8,7 +8,9 @@
 
 # Introduction
 
+<div align="center">
 <img src="./figures/framework.png" alt="llustration of the Risk-Sensitive RL vs Standard RL." width="600" />
+</div>
 
 **Exploration Dilemma:** Current RL methods for LLMs improve pass@1 but hurt pass@k performance. They sharpen the policy distribution around a few solutions, leading to a collapse in solution diversity. This prevents the discovery of novel reasoning strategies.
 
@@ -70,7 +72,9 @@ More details can be found in the paper.
 
 ## Empirical Perspective
 
+<div align="center">
 <img src="./figures/bandit.png" alt="bandit" width="600" />
+</div>
 
 A bandit experiment demonstrating that risk-sensitive RL can escape a local optimum that traps its standard RL counterpart.
 - **Left:** The reward landscape shows a global optimum and a distinct local optimum where the policy is initialized. 
@@ -78,11 +82,15 @@ A bandit experiment demonstrating that risk-sensitive RL can escape a local opti
 
 # Results Highlight
 
+<div align="center">
 <img src="./figures/passk.png" alt="passk" width="600" />
+</div>
 RS-GRPO consistently improves pass@k performance over and the standard GRPO algorithm across six mathematical reasoning benchmarks and five LLMs.
 
 
+<div align="center">
 <img src="./figures/bench.png" alt="bench" width="600" />
+</div>
 
 The table provides a more comprehensive evaluation, covering five base models and three training datasets (math12k, deepmath103k, dapo17k). RS-GRPO consistently improves pass@k performance over standard GRPO algorithm. While many pass@k-oriented methods fail to improve pass@1 over GRPO, RS-GRPO achieves at least comparable Pass@1 performance and exceeds GRPO by an average of about 2\% across three models (Qwen2.5-7B-Math, Qwen2.5-7B, Qwen3-4B).
 

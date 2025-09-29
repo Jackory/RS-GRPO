@@ -6,6 +6,11 @@
 
 </div>
 
+
+# Quick Start
+- `codes/bandit.py` contains our complete, runnable code for the bandit setting.
+- `codes/risk_sensitive_adv.py` contains the implementation based [VeRL](https://github.com/volcengine/verl).
+
 # Introduction
 
 <div align="center">

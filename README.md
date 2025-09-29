@@ -12,6 +12,8 @@
 
 **Exploration Dilemma:** Current RL methods for LLMs improve pass@1 but hurt pass@k performance. They sharpen the policy distribution around a few solutions, leading to a collapse in solution diversity. This prevents the discovery of novel reasoning strategies.
 
+We argue this dilemma arises from a fundamental mismatch between the optimization landscape of LLMs and the dynamics of standard RL algorithms. LLMs begin with a highly specialized policy distribution that is already sharply peaked around certain solutions. If those initial peaks are not supported in the regions that yield optimal rewards, standard RL optimizers face a significant challenge: they struggle to escape the gravitational pull of the pretrained model's biases and tend to converge to a nearby, but often suboptimal mode. This prevents the discovery of more diverse and powerful reasoning paths.
+
 
 # Method 
 
@@ -23,20 +25,20 @@ $$
 \mathcal{J}_{\text{RS}}(\pi_\theta) = \mathbb{E}_{x \sim \mathcal{D}} \left[ \frac{1}{\beta} \log \mathbb{E}_{y \sim \pi_\theta(\cdot|x)} \left[ e^{\beta r(y)} \right] \right]
 $$
 
-where $\beta \in (0, +\infin)$, controls the risk-sensitivity. 
-- As $\beta \rightarrow 0.$,  the objective recovers the standard expected reward, $\mathbb{E}[r(y)]$.
-- As $\beta \to +\infty,$ the objective approaches the maximum reward, $\max_y r(y)$, encouraging exploration.
+where $\beta \in (0, +\infty)$, controls the risk-sensitivity. 
+- As $\beta \rightarrow 0$,  the objective recovers the standard expected reward, $\mathbb{E}[r(y)]$.
+- As $\beta \to +\infty$,  the objective approaches the maximum reward, $\max_y r(y)$, encouraging exploration.
 
 The corresponding **Risk-Sensitive Policy Gradient** is:
 
 $$
-\nabla_\theta \mathcal{J}_{\text{RS}}(\pi_\theta) = \mathbb{E}_{x, y} \left[ \hat{A}^{\pi_\theta}_\beta(y) \nabla_\theta \log \pi_\theta(y \mid x) \right]
+\nabla_\theta \mathcal{J}_{\text{RS}}(\pi_\theta) = \mathbb{E}_{x, y} \left[ \hat{A}_\beta(y) \nabla_\theta \log \pi_\theta(y \mid x) \right]
 $$
 
 with the **Risk-Sensitive Advantage**:
 
 $$
-\hat{A}^{\pi_\theta}_\beta(y) = \frac{1}{\beta} \left( \frac{ e^{\beta r(y)} }{ \mathbb{E}_{y'} [ e^{\beta r(y')} ] } - 1 \right)
+\hat{A}_\beta(y) = \frac{1}{\beta} \left( \frac{ e^{\beta r(y)} }{ \mathbb{E}_{y'} [ e^{\beta r(y')} ] } - 1 \right)
 $$
 
 A key feature of this formulation is that it only alters the advantage computation while leaving the policy gradient structure intact. This allows our risk-sensitive advantage to serve as a drop-in replacement in existing GRPO-based RL algorithms, requiring only minimal code modifications.

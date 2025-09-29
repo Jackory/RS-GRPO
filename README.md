@@ -38,10 +38,7 @@ $$
 with the **Risk-Sensitive Advantage** can be approximated as:
 
 $$
-\hat{A}_\beta(y_i) = \frac{1}{\beta} \left(
-\frac{ e^{\beta r(y_i)} }
-     { \tfrac{1}{N} \sum_{j=1}^N e^{\beta r(y_j)} }
-- 1 \right).
+\hat{A}_\beta(y_i) = \frac{1}{\beta} \left(\frac{ e^{\beta r(y_i)} }{ \tfrac{1}{N} \sum_{j=1}^N e^{\beta r(y_j)} }- 1 \right).
 $$
 
 A key feature of this formulation is that it only alters the advantage computation while leaving the policy gradient structure intact. This allows our risk-sensitive advantage to serve as a drop-in replacement in existing GRPO-based RL algorithms, requiring only minimal code modifications.

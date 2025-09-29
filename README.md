@@ -12,7 +12,7 @@
 
 **Exploration Dilemma:** Current RL methods for LLMs improve pass@1 but hurt pass@k performance. They sharpen the policy distribution around a few solutions, leading to a collapse in solution diversity. This prevents the discovery of novel reasoning strategies.
 
-We argue this dilemma arises from a fundamental mismatch between the optimization landscape of LLMs and the dynamics of standard RL algorithms. LLMs begin with a highly specialized policy distribution that is already sharply peaked around certain solutions. If those initial peaks are not supported in the regions that yield optimal rewards, standard RL optimizers face a significant challenge: they struggle to escape the gravitational pull of the pretrained model's biases and tend to converge to a nearby, but often suboptimal mode. This prevents the discovery of more diverse and powerful reasoning paths.
+We argue this dilemma arises from a fundamental mismatch between the optimization landscape of LLMs and the dynamics of standard RL algorithms. **LLMs begin with a highly specialized policy distribution** that is already sharply peaked around certain solutions. If those initial peaks are not supported in the regions that yield optimal rewards, standard RL optimizers face a significant challenge: **they struggle to escape the gravitational pull of the pretrained model's biases and tend to converge to a nearby, but often suboptimal mode**. This prevents the discovery of more diverse and powerful reasoning paths.
 
 
 # Method 
@@ -35,10 +35,13 @@ $$
 \nabla_\theta \mathcal{J}_{\text{RS}}(\pi_\theta) = \mathbb{E}_{x, y} \left[ \hat{A}_\beta(y) \nabla_\theta \log \pi_\theta(y \mid x) \right]
 $$
 
-with the **Risk-Sensitive Advantage**:
+with the **Risk-Sensitive Advantage** can be approximated as:
 
 $$
-\hat{A}_\beta(y) = \frac{1}{\beta} \left( \frac{ e^{\beta r(y)} }{ \mathbb{E}_{y'} [ e^{\beta r(y')} ] } - 1 \right)
+\hat{A}_\beta(y_i) = \frac{1}{\beta} \left(
+\frac{ e^{\beta r(y_i)} }
+     { \tfrac{1}{N} \sum_{j=1}^N e^{\beta r(y_j)} }
+- 1 \right).
 $$
 
 A key feature of this formulation is that it only alters the advantage computation while leaving the policy gradient structure intact. This allows our risk-sensitive advantage to serve as a drop-in replacement in existing GRPO-based RL algorithms, requiring only minimal code modifications.
@@ -73,8 +76,8 @@ More details can be found in the paper.
 ![bandit](./figures/bandit.png)
 
 A bandit experiment demonstrating that risk-sensitive RL can escape a local optimum that traps its standard RL counterpart.
-- \textbf{Left:} The reward landscape shows a global optimum and a distinct local optimum where the policy is initialized. 
-- \textbf{Right:} A standard risk-neutral policy ($\beta=0$) is trapped locally, while risk-sensitive policies ($\beta \geq 4$) converge to the global optimum.
+- **Left:** The reward landscape shows a global optimum and a distinct local optimum where the policy is initialized. 
+- **Right:** A standard risk-neutral policy ($\beta=0$) is trapped locally, while risk-sensitive policies ($\beta \geq 4$) converge to the global optimum.
 
 # Results Highlight
 

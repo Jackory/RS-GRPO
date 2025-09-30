@@ -65,7 +65,7 @@ We compare a single policy update for both standard policy gradient and our risk
 
 Our analysis reveals a key weakness in the standard policy gradient: it can decrease the probability of the optimal action.
 
-> **Lemma 1:** Standard policy gradient can decrease the probability of the optimal action if a suboptimal action with a reward better than the average exists.
+> **Lemma 1:** The standard policy gradient update can decrease the probability of the optimal action.
 
 In contrast, our risk-sensitive approach ensures improvement for the optimal action with a sufficiently large risk-sensitivity parameter $\beta$.
 

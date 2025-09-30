@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Paper](https://img.shields.io/badge/paper-A42C25?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2506.10406)
+[![Paper](https://img.shields.io/badge/paper-A42C25?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2509.24261)
 
 </div>
 
@@ -101,11 +101,15 @@ The table provides a more comprehensive evaluation, covering five base models an
 
 We recommend setting $\beta=2$, which achieves a good trade-off between pass@k and pass@1 performance in our experiments.
 
-<!-- # Citation
+# Citation
 If you find our work useful, please cite our paper:
 
+```
 @article{jiang2025riskrl,
-  title={Risk-Sensitive RL for Alleviating Exploration Dilemmas in Large Language Models},
-  journal={arXiv preprint arXiv:2506.10406},
-  year={2025}   
-} -->
+  title={Risk-Sensitive RL for Alleviating Exploration Dilemmas in Large Language Models}, 
+  author={Yuhua Jiang and Jiawei Huang and Yufeng Yuan and Xin Mao and Yu Yue and Qianchuan Zhao and Lin Yan},
+  year={2025},
+  journal={arXiv preprint arXiv:2509.24261},
+  url={https://arxiv.org/abs/2509.24261}, 
+}
+```
